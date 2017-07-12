@@ -7,7 +7,7 @@ import Pin from "./Pin";
 
 class PinList extends Component {
   render() {
-    console.log("PinList props", this.props);
+    // console.log("PinList props", this.props);
     let user = this.props.selectedUser;
     return (
       <Container>
@@ -25,8 +25,6 @@ class PinList extends Component {
           </Header>}
         <Masonry>
           {this.props.pinList.map(pin => {
-            // console.log("pin id", pin._id);
-
             return <Pin key={pin.id} {...pin} />;
           })}
         </Masonry>

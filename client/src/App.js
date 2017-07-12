@@ -32,8 +32,6 @@ class App extends Component {
       .get("/pins")
       .then(res => {
         console.log("pins res", res);
-        // store.dispatch res.data.displayName
-        // let { displayName } = res.data;
         store.dispatch({ type: "PINS_DATA", payload: res.data });
       })
       .catch(err => {

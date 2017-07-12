@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Lightbox from "react-images";
 
-// get user from react router
-// or sync react router with redux
-// get route from location prop
-
 class LightboxWrapper extends Component {
   constructor(props) {
     super(props);
@@ -42,13 +38,11 @@ class LightboxWrapper extends Component {
     return this.props.pinList.map(pin => ({
       src: pin.imageUrl,
       caption: pin.title
-      // id: pin.id // do i need this??
     }));
   };
 
   render() {
-    console.log("render LightboxWrapper props", this.props);
-
+    // console.log("render LightboxWrapper props", this.props);
     return (
       <Lightbox
         images={this.getImagesArray()}

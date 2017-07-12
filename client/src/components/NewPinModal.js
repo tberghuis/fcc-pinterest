@@ -10,14 +10,12 @@ class NewPinModal extends Component {
     this.state = { errors: {} };
   }
   handleSubmit = e => {
-    // prevent def
     e.preventDefault();
 
-    console.log("title", this.titleInput.value);
-    console.log("image", this.imageInput.value);
+    // console.log("title", this.titleInput.value);
+    // console.log("image", this.imageInput.value);
 
     // get data
-
     let title = this.titleInput.value,
       imageUrl = this.imageInput.value;
 
@@ -25,15 +23,8 @@ class NewPinModal extends Component {
     axiosApi
       .post("/pins/create", { title, imageUrl })
       .then(res => {
-        // lets make a new snippet log(thing)
-        // fun(param)
-        // or just xhr
-
-        // dispatch CLOSE_NEW_PIN_MODAL
         this.props.dispatch({ type: "CLOSE_NEW_PIN_MODAL" });
-        // dispatch ADD_PIN
-
-        console.log("new pin res.data", res.data);
+        // console.log("new pin res.data", res.data);
         let pin = {
           id: res.data._id,
           title: res.data.title,
@@ -47,32 +38,23 @@ class NewPinModal extends Component {
         this.setState({ errors: {} });
       })
       .catch(err => {
-        console.log("err", err);
-        // console.log("err.keys", Object.keys(err));
-        console.log("err.config", err.config);
-        console.log("err.request", err.request);
-        console.log("err.response", err.response);
-
+        // console.log("err", err);
+        // // console.log("err.keys", Object.keys(err));
+        // console.log("err.config", err.config);
+        // console.log("err.request", err.request);
+        // console.log("err.response", err.response);
         let { errors } = err.response.data;
         if (errors) {
-          //setstate
-          console.log("setState");
-          // TODO file bug report,
-          // resorting to redux... will it blend
           this.setState({ errors });
-          // this.props.dispatch({ type: "NEW_PIN_FORM_ERRORS", errors });
         }
       });
-    // then dispatch new pin data
-    // catch, setState field error
   };
   handleClose = () => {
     this.setState({ errors: {} });
     this.props.dispatch({ type: "CLOSE_NEW_PIN_MODAL" });
   };
   render() {
-    console.log("render newpinmodal props", this.props);
-
+    // console.log("render newpinmodal props", this.props);
     return (
       <Modal open={this.props.showNewPinModal} onClose={this.handleClose}>
         <Modal.Header>New Pin</Modal.Header>
@@ -115,4 +97,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(NewPinModal);
-// export default NewPinModal;

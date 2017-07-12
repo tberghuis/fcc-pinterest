@@ -2,11 +2,6 @@ const router = require("express").Router();
 
 const User = require("../models/user");
 
-const errorHandler = res => err => {
-  console.log("500 error", err);
-  res.status(500).json(err);
-};
-
 router.get("/:userId", async function(req, res, next) {
   try {
     // console.log("get /user/:userId", req);
@@ -20,3 +15,8 @@ router.get("/:userId", async function(req, res, next) {
 });
 
 module.exports = router;
+
+const errorHandler = res => err => {
+  console.log("500 error", err);
+  res.status(500).json(err);
+};

@@ -1,17 +1,12 @@
 const router = require("express").Router();
 const passport = require("passport");
 const validUrl = require("valid-url");
+const ObjectId = require("mongoose").Types.ObjectId;
 
 const Pin = require("../models/pin");
 
-const errorHandler = res => err => {
-  console.log("500 error", err);
-  res.status(500).json(err);
-};
-
 router.get("/", async function(req, res, next) {
   // get all pins....
-  // query user_id for mypins
   // TODO pagination???
   try {
     // console.log("get /pins req.user", req.user);
@@ -35,9 +30,9 @@ router.get("/", async function(req, res, next) {
   }
 });
 
-router.get("/mypins", passport.isLoggedIn, function(req, res, next) {
-  // DRY seperate function
-});
+// router.get("/mypins", passport.isLoggedIn, function(req, res, next) {
+//   // DRY seperate function
+// });
 
 router.post("/create", passport.isLoggedIn, function(req, res, next) {
   let { title, imageUrl } = req.body;
@@ -74,17 +69,13 @@ router.post("/create", passport.isLoggedIn, function(req, res, next) {
     .then(pin => {
       res.json(pin);
     })
-    .catch(err => {
-      // TODO
-      console.log("err", err);
-    });
+    .catch(errorHandler(res));
 });
 
 // get is not convential REST
 // but who cares for now
 router.get("/like/:pinId", passport.isLoggedIn, function(req, res, next) {
   // console.log("req", req);
-  // req.params.pinId
   Pin.findById(req.params.pinId)
     .then(pin => {
       console.log("pin", pin);
@@ -116,7 +107,6 @@ router.get("/delete/:pinId", passport.isLoggedIn, async function(
   res,
   next
 ) {
-  var ObjectId = require("mongoose").Types.ObjectId;
   try {
     await Pin.find({
       _id: new ObjectId(req.params.pinId),
@@ -135,3 +125,8 @@ module.exports = router;
 function empty(obj) {
   return Object.keys(obj).length === 0 && obj.constructor === Object;
 }
+
+const errorHandler = res => err => {
+  console.log("500 error", err);
+  res.status(500).json(err);
+};

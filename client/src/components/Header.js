@@ -25,7 +25,6 @@ class Header extends Component {
     axiosApi
       .get("/auth/logout")
       .then(res => {
-        // dispatch
         this.props.dispatch({ type: "LOGOUT" });
       })
       .catch(err => {

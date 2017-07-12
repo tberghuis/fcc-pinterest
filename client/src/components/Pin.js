@@ -5,9 +5,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axiosApi from "../axiosApi";
 
-// make this connected
-// next task post like/dislike
-
 const CardStyled = styled(Card)`
 .extra.content {
   display: flex;
@@ -35,7 +32,6 @@ class Pin extends Component {
   }
 
   handleImageClick = pinId => () => {
-    //dispatch TODO pinid??
     this.props.dispatch({ type: "SHOW_LIGHTBOX", pinId: this.props.id });
   };
 
@@ -52,7 +48,6 @@ class Pin extends Component {
     // toggle liked
     if (this.props.liked) {
       // optimistic update
-      //dispatch
       this.props.dispatch({ type: "PIN_DISLIKE", pinId: this.props.id });
       axiosApi
         .get(`/pins/dislike/${this.props.id}`)
@@ -64,7 +59,6 @@ class Pin extends Component {
         });
     } else {
       // optimistic update
-      //dispatch
       this.props.dispatch({ type: "PIN_LIKE", pinId: this.props.id });
       axiosApi
         .get(`/pins/like/${this.props.id}`)

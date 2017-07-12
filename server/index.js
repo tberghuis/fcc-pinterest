@@ -19,20 +19,19 @@ db.once("open", function() {
 require("./config/passport")(passport);
 
 const app = express();
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({ origin: process.env.CLIENT_BASE_URI, credentials: true }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-// session???
 app.use(
   session({
-    secret: process.env.SESSION_SECRET, // session secret
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true
   })
 );
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
+app.use(passport.session());
 
 app.use(require("./routes/index"));
 

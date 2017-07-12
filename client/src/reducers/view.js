@@ -8,12 +8,6 @@ const defaultState = {
 
 const view = (state = defaultState, action) => {
   switch (action.type) {
-    // case "LOGOUT":
-    // return {
-    //         ...state,
-
-    //         selectedUser: null
-    //       };
     case "FILTER_PINS":
       return {
         ...state,

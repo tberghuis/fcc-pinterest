@@ -17,7 +17,6 @@ class PinsFilter extends Component {
         type: "FILTER_PINS",
         pinList,
         selectedUser: this.props.loggedInUser
-        // selectedUser: "MYPINS"
       });
       return;
     }
@@ -66,7 +65,6 @@ class PinsFilter extends Component {
       nextProps.pins,
       nextProps.loggedIn
     );
-
     // user just logged out
     if (!nextProps.loggedIn && nextProps.loggedIn !== this.props.loggedIn) {
       this.props.history.push("/");
