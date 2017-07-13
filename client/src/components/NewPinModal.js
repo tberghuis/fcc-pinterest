@@ -71,7 +71,7 @@ class NewPinModal extends Component {
                   {this.state.errors.title}
                 </div>}
             </Form.Field>
-            <Form.Field error={!!this.state.errors.title}>
+            <Form.Field error={!!this.state.errors.imageUrl}>
               <label>Image URL</label>
               <input
                 ref={input => (this.imageInput = input)}
