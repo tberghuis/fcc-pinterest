@@ -4,6 +4,15 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axiosApi from "../axiosApi";
+import ImageLoader from "react-imageloader";
+import Spinner from "react-spinkit";
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+`;
 
 const CardStyled = styled(Card)`
 .extra.content {
@@ -28,7 +37,10 @@ img {
 class Pin extends Component {
   constructor(props) {
     super(props);
-    this.state = { flashErrorMessage: false };
+    this.state = {
+      flashErrorMessage: false,
+      imageLoaded: false
+    };
   }
 
   handleImageClick = pinId => () => {
@@ -99,11 +111,22 @@ class Pin extends Component {
     var showDelete = this.props.loggedIn && this.props.userId === owner;
     return (
       <CardStyled>
-        <Image
-          onError={this.addDefaultSrc}
-          onClick={this.handleImageClick(this.props.id)}
-          src={imageUrl}
-        />
+        {!this.state.imageLoaded &&
+          <ImageLoader
+            src={imageUrl}
+            onLoad={() => this.setState({ imageLoaded: true })}
+            onError={() => this.setState({ imageLoaded: true })}
+            preloader={() =>
+              <SpinnerWrapper>
+                <Spinner name="line-scale" />
+              </SpinnerWrapper>}
+          />}
+        {this.state.imageLoaded &&
+          <Image
+            onError={this.addDefaultSrc}
+            onClick={this.handleImageClick(this.props.id)}
+            src={imageUrl}
+          />}
         <Card.Content>
           <Card.Header>
             {title}

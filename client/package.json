@@ -6,11 +6,13 @@
     "axios": "^0.16.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-imageloader": "^2.1.0",
     "react-images": "^0.5.4",
     "react-masonry-component": "^5.0.7",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-scripts": "1.0.10",
+    "react-spinkit": "^3.0.0",
     "redux": "^3.7.1",
     "semantic-ui-react": "^0.70.0",
     "styled-components": "^2.1.1"

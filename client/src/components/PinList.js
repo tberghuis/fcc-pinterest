@@ -23,7 +23,10 @@ class PinList extends Component {
               @{user.username}
             </a>
           </Header>}
-        <Masonry>
+        <Masonry
+          style={{ marginBottom: "20px" }}
+          enableResizableChildren={true}
+        >
           {this.props.pinList.map(pin => {
             return <Pin key={pin.id} {...pin} />;
           })}
